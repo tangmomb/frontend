@@ -386,7 +386,7 @@ export default function Home() {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                   <div style={{ position: 'relative', width: '300px', height: '300px', borderRadius: '0.5rem', overflow: 'hidden', border: '1px solid var(--border)' }}>
-                    <Image src="/images/_DSC1998-copie-3.jpeg" alt="Tanguy" fill style={{ objectFit: 'cover' }} />
+                    <Image src="https://storage.googleapis.com/portfolio-photos23123/_DSC1998-copie-3.jpeg" alt="Tanguy" fill style={{ objectFit: 'cover' }} />
                   </div>
                 </div>
               </div>
