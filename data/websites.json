@@ -1,0 +1,58 @@
+[
+  {
+    "title": "Tennis Winner",
+    "description": "Qui a gagné les derniers tournois majeurs ?",
+    "link": "https://tennisgsolympicsscores-cmxidknbazy5swry5voadm.streamlit.app/",
+    "category": "data",
+    "technologies": [
+      "Python"
+    ],
+    "image": "tennisstats.png",
+    "highlight": "oui"
+  },
+  {
+    "title": "Ce portfolio",
+    "description": "Le site tourne sur NextJS via le repos GitHub, que n8n alimente quand les fichiers Google Drive sont mis à jour.",
+    "link": "#",
+    "category": "web",
+    "technologies": [
+      "NextJS",
+      "n8n"
+    ],
+    "image": "portfolio.png",
+    "highlight": "oui"
+  },
+  {
+    "title": "GitHub",
+    "description": "Consultez mon GitHub pour d'autres projets !",
+    "link": "https://github.com/tangmomb",
+    "category": "all",
+    "technologies": [
+      "GitHub"
+    ],
+    "image": "github.png",
+    "highlight": "oui"
+  },
+  {
+    "title": "Geocom Networks",
+    "description": "Un site complet réalisé sur Webflow",
+    "link": "https://www.geocom-networks.com/",
+    "category": "web",
+    "technologies": [
+      "Webflow"
+    ],
+    "image": "geocom.png",
+    "highlight": "oui"
+  },
+  {
+    "title": "Cavanine",
+    "description": "alors",
+    "link": "",
+    "category": "",
+    "technologies": [
+      "WordPress"
+    ],
+    "image": "cavanine.png",
+    "highlight": "non"
+  }
+]

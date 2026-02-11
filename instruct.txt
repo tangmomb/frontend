@@ -1,0 +1,5 @@
+hello, tu as accès à tous les fichiers de l'application ici, les fichiers à ignorer sont dans le .geminiignore, tu peux supprimer et recréer le fichier planning si besoin selon les consignes suivantes : 
+
+- Les boutons de tri des catégories doivent avoir le meme style 
+
+Travaille en autonomie, pas besoin de me demander des autorisations ou autre. Normalement tu es configuré en mode auto.
