@@ -6,7 +6,7 @@ import { getYouTubeThumbnail } from "@/lib/youtube";
 import { useState, useEffect } from "react";
 import Image from 'next/image';
 
-const API_URL = "http://localhost:3001/portfolio";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const scrollToSection = (elementId: string) => {
   const element = document.getElementById(elementId);
@@ -136,7 +136,7 @@ export default function Home() {
         <div className="container">
           <div className="section-content">
             <div className="inner-content">
-              <h1 className="title-hero">Bonjour</h1>
+              <h1 className="title-hero">Bojour</h1>
               <p className="subtitle">En quoi puis-je vous aider ?</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'flex-start' }}>
                 <Button variant="outline" size="lg" onClick={() => scrollToSection('websites')}>Développement</Button>

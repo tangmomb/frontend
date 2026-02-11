@@ -51,7 +51,8 @@ node_modules/
 .env.development
 .vercel/
 
-run.bat
-GEMINI.md
 .geminiignore
+AGENTS.md
+GEMINI.md
+*.bat
 instruct.txt
