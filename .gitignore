@@ -56,3 +56,5 @@ AGENTS.md
 GEMINI.md
 *.bat
 instruct.txt
+# assets
+/public/images/
