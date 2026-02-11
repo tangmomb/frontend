@@ -50,3 +50,9 @@ node_modules/
 .env.production
 .env.development
 .vercel/
+
+run.bat
+GEMINI.md
+.gitignore
+.geminiignore
+instruct.txt
