@@ -8,6 +8,14 @@ import Image from 'next/image';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+const getAllEndpoint = (base?: string) => {
+  if (!base) return '';
+  const normalized = base.replace(/\/+$/, '');
+  return normalized.endsWith('/portfolio')
+    ? `${normalized}/all`
+    : `${normalized}/portfolio/all`;
+};
+
 const scrollToSection = (elementId: string) => {
   const element = document.getElementById(elementId);
   if (!element) return;
@@ -56,9 +64,15 @@ export default function Home() {
       }, 100);
 
       try {
-        const response = await fetch(`${API_URL}/all`);
+        const allEndpoint = getAllEndpoint(API_URL);
+        const response = await fetch(allEndpoint);
         const result = await response.json();
-        setData(result);
+        setData({
+          videos: Array.isArray(result?.videos) ? result.videos : [],
+          websites: Array.isArray(result?.websites) ? result.websites : [],
+          designs: Array.isArray(result?.designs) ? result.designs : [],
+          photos: Array.isArray(result?.photos) ? result.photos : [],
+        });
         
         // Finish progress
         setProgress(100);
