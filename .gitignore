@@ -53,6 +53,5 @@ node_modules/
 
 run.bat
 GEMINI.md
-.gitignore
 .geminiignore
 instruct.txt
