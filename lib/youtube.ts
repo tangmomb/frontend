@@ -3,7 +3,8 @@ export function getYouTubeVideoId(url: string): string | null {
     /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&\n?#]+)/,
     /(?:https?:\/\/)?(?:www\.)?youtu\.be\/([^&\n?#]+)/,
     /(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([^&\n?#]+)/,
-    /(?:https?:\/\/)?(?:www\.)?youtube\.com\/v\/([^&\n?#]+)/
+    /(?:https?:\/\/)?(?:www\.)?youtube\.com\/v\/([^&\n?#]+)/,
+    /(?:https?:\/\/)?(?:www\.)?youtube\.com\/shorts\/([^&\n?#]+)/
   ];
 
   for (const pattern of patterns) {

@@ -334,5 +334,11 @@
     "category": "motion design",
     "description": "Appel à l'action en fin de vidéo.",
     "platform": "youtube"
+  },
+  {
+    "url": "https://www.youtube.com/shorts/aWaLj4P2xs0",
+    "category": "autre",
+    "description": "Exemple de YouTube Short.",
+    "platform": "youtube"
   }
 ]

@@ -101,7 +101,7 @@ export default function Home() {
   };
 
   const getEmbedUrl = (url: string) => {
-    const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?/\s]{11})/);
+    const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([^&?/\s]{11})/);
     if (ytMatch) return `https://www.youtube.com/embed/${ytMatch[1]}`;
     const vimeoMatch = url.match(/(?:vimeo\.com\/|player\.vimeo\.com\/video\/)(\d+)/);
     if (vimeoMatch) return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
@@ -150,7 +150,7 @@ export default function Home() {
         <div className="container">
           <div className="section-content">
             <div className="inner-content">
-              <h1 className="title-hero">Bojour</h1>
+              <h1 className="title-hero">Bonjour</h1>
               <p className="subtitle">En quoi puis-je vous aider ?</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'flex-start' }}>
                 <Button variant="outline" size="lg" onClick={() => scrollToSection('websites')}>Développement</Button>
@@ -334,7 +334,7 @@ export default function Home() {
               <h2 className="title-section">Photos</h2>
               <p className="subtitle">Ma galerie photo.</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem', marginBottom: '2rem' }}>
-                {['all', 'paysage', 'portrait', 'évènement', 'pub', 'autre'].map(c => (
+                {['all', 'portrait', 'évènementiel', 'pub', 'autre'].map(c => (
                   <Button key={c} variant={selectedPhotoCategory === c ? 'primary' : 'outline'} size="sm" onClick={() => setSelectedPhotoCategory(c)}>
                     {c === 'all' ? 'Toutes' : c}
                   </Button>
@@ -375,7 +375,7 @@ export default function Home() {
                   <h2 className="title-section">Qui suis-je ?</h2>
                   <div style={{ color: 'var(--muted-foreground)', marginBottom: '2rem' }}>
                     <p style={{ marginBottom: '1rem' }}>mon parcours rapidement :</p>
-                    <p>Après un Bac S, j'ai été diplômé d'un Bachelor Web effectué à Hétic. J'ai travaillé pendant presque 5 ans dans un groupe du CAC 40 et aujourd'hui, je suis freelance depuis 3 ans.</p>
+                    <p>Après un Bac S, j&apos;ai été diplômé d&apos;un Bachelor Web effectué à Hétic. J&apos;ai travaillé pendant presque 5 ans dans un groupe du CAC 40 et aujourd&apos;hui, je suis freelance depuis 3 ans.</p>
                   </div>
                   <h3 className="card-title" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Contact</h3>
                   <p>
