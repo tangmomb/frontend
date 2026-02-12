@@ -223,11 +223,12 @@ export default function Home() {
                           <span className="card-hover-button">Voir</span>
                         </div>
                       </div>
-                      <div style={{ marginTop: '0.5rem' }}>
+                      <div className="card-content-group">
+                        <div className="card-title">{project.title}</div>
                         <div className="card-description">{project.description}</div>
-                      </div>
-                      <div style={{ marginTop: '0.5rem' }}>
-                        {project.technologies?.map((t: string, j: number) => <span key={j} className="tech-tag">{t}</span>)}
+                        <div style={{ marginTop: '0.5rem' }}>
+                          {project.technologies?.map((t: string, j: number) => <span key={j} className="tech-tag">{t}</span>)}
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
