@@ -302,10 +302,27 @@ body {
   font-size: 3rem;
   cursor: pointer;
   padding: 1rem;
+  z-index: 110;
 }
 
 .lightbox-prev { left: 1rem; }
 .lightbox-next { right: 1rem; }
+
+@media (max-width: 768px) {
+  .lightbox-nav {
+    top: auto;
+    bottom: 2rem;
+    transform: none;
+    font-size: 4rem;
+  }
+  .lightbox-prev {
+    left: 20%;
+  }
+  .lightbox-next {
+    right: 20%;
+  }
+}
+
 .lightbox-close {
   position: absolute;
   top: 1rem;

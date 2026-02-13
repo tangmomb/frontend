@@ -402,11 +402,32 @@ export default function Home() {
           <button className="lightbox-nav lightbox-prev" onClick={(e) => navigateLightbox('prev', e)}>‹</button>
           <button className="lightbox-nav lightbox-next" onClick={(e) => navigateLightbox('next', e)}>›</button>
           <button className="lightbox-close">✕</button>
-          <div style={{ position: 'relative', maxWidth: '90%', maxHeight: '90%' }}>
+          <div 
+            style={{ 
+              position: 'relative', 
+              width: lightboxItem.type === 'video' ? '90vw' : 'auto', 
+              maxWidth: lightboxItem.type === 'video' ? '1200px' : '90%',
+              maxHeight: '90vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }} 
+            onClick={(e) => e.stopPropagation()}
+          >
             {lightboxItem.type === 'video' ? (
-              <iframe src={getEmbedUrl(lightboxItem.data.url)} style={{ width: '60vw', aspectRatio: '16/9', border: 'none' }} allowFullScreen />
+              <iframe 
+                src={getEmbedUrl(lightboxItem.data.url)} 
+                style={{ 
+                  height: '100%',
+                  aspectRatio: (lightboxItem.data.url.includes('shorts') || lightboxItem.data.url.includes('vimeo.com') || lightboxItem.data.orientation === 'vertical') ? '9/16' : '16/9', 
+                  border: 'none',
+                  maxHeight: (lightboxItem.data.url.includes('shorts') || lightboxItem.data.url.includes('vimeo.com') || lightboxItem.data.orientation === 'vertical') ? '80vh' : 'auto',
+                  width: (lightboxItem.data.url.includes('shorts') || lightboxItem.data.url.includes('vimeo.com') || lightboxItem.data.orientation === 'vertical') ? 'auto' : '100%'
+                }} 
+                allowFullScreen 
+              />
             ) : (
-              <div style={{ position: 'relative', width: 'auto', height: 'auto' }}>
+              <div style={{ position: 'relative', width: 'auto', height: 'auto', display: 'flex', justifyContent: 'center' }}>
                  <img src={getImagePath(lightboxItem.data.image)} alt="preview" style={{ maxWidth: '100%', maxHeight: '80vh', objectFit: 'contain' }} />
               </div>
             )}
