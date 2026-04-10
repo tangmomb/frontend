@@ -206,12 +206,13 @@ body {
 }
 
 .button-purple {
-  background-color: #4820a5;
+  background-color: #1d0f3f;
+  border: 1px solid #493080;
   color: white;
 }
 
 .button-purple:hover {
-  background-color: #5b2bc2;
+  background-color: #31166d;
 }
 
 .button-sm { height: 2rem; padding: 0 0.75rem; font-size: 0.86rem; }
