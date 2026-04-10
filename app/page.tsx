@@ -5,6 +5,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { getYouTubeThumbnail } from "@/lib/youtube";
 import { useState, useEffect } from "react";
 import Image from 'next/image';
+import { ArrowUp } from "lucide-react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -50,6 +51,7 @@ export default function Home() {
   const [selectedPhotoCategory, setSelectedPhotoCategory] = useState<string>("all");
   const [lightboxOpen, setLightboxOpen] = useState<boolean>(false);
   const [lightboxItem, setLightboxItem] = useState<{type: 'video' | 'design' | 'photo', data: any} | null>(null);
+  const [showSticky, setShowSticky] = useState(false);
 
   useEffect(() => {
     let progressInterval: NodeJS.Timeout;
@@ -88,6 +90,14 @@ export default function Home() {
     }
     fetchData();
     return () => clearInterval(progressInterval);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowSticky(window.scrollY > 300);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const filteredVideos = selectedCategory === "all" ? data.videos : data.videos.filter(v => v.category === selectedCategory);
@@ -145,6 +155,21 @@ export default function Home() {
 
   return (
     <div className="page-wrapper animate-fade-in">
+      {/* Sticky Header */}
+      <div className={`sticky-header ${showSticky ? 'visible' : ''}`}>
+        <nav className="sticky-header-nav">
+          <Button variant="outline" size="sm" onClick={() => scrollToSection('home')}>Accueil</Button>
+          <Button variant="outline" size="sm" onClick={() => scrollToSection('videos')}>Vidéos</Button>
+          <Button variant="outline" size="sm" onClick={() => scrollToSection('photos')}>Photos</Button>
+          <Button variant="outline" size="sm" onClick={() => scrollToSection('graphic')}>Graphisme</Button>
+          <Button variant="outline" size="sm" onClick={() => scrollToSection('websites')}>Développement</Button>
+          <div className="hero-contact-wrapper">
+            <div className="hero-contact-bg" />
+            <Button variant="outline" size="sm" onClick={() => scrollToSection('about')} style={{ position: 'relative' }}>Contact</Button>
+          </div>
+        </nav>
+      </div>
+
       {/* Hero Section */}
       <section id="home" className="section">
         <div className="container">
@@ -153,125 +178,14 @@ export default function Home() {
               <h1 className="title-hero">Bonjour</h1>
               <p className="subtitle">En quoi puis-je vous aider ?</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'flex-start' }}>
-                <Button variant="outline" size="lg" onClick={() => scrollToSection('websites')}>Développement</Button>
-                <Button variant="outline" size="lg" onClick={() => scrollToSection('graphic')}>Graphisme</Button>
                 <Button variant="outline" size="lg" onClick={() => scrollToSection('videos')}>Vidéos</Button>
                 <Button variant="outline" size="lg" onClick={() => scrollToSection('photos')}>Photos</Button>
+                <Button variant="outline" size="lg" onClick={() => scrollToSection('graphic')}>Graphisme</Button>
+                <Button variant="outline" size="lg" onClick={() => scrollToSection('websites')}>Développement</Button>
                 <div className="hero-contact-wrapper">
                   <div className="hero-contact-bg" />
                   <Button variant="outline" size="lg" onClick={() => scrollToSection('about')} style={{ position: 'relative' }}>Contact</Button>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Websites Section */}
-      <section id="websites" className="section">
-        <div className="container">
-          <div className="section-content">
-            <div className="inner-content">
-              <h2 className="title-section">Développement</h2>
-              <p className="subtitle">Mes projets data / web.</p>
-              
-              <div className="grid-gallery" style={{ display: 'flex', overflowX: 'auto', paddingBottom: '1rem' }}>
-                {data.websites
-                  .filter(p => p.highlight === "oui")
-                  .sort((a, b) => (a.title === "GitHub" ? 1 : b.title === "GitHub" ? -1 : 0))
-                  .map((project, i) => (
-                  <Card 
-                    key={i} 
-                    className={`card-interactive ${project.title === "GitHub" ? "card-github" : ""}`} 
-                    style={{ width: '210px', flexShrink: 0 }} 
-                    onClick={() => window.open(project.link, '_blank')}
-                  >
-                    <CardContent>
-                      <div className="card-image-container">
-                        <Image src={getImagePath(project.image)} alt={project.title} fill style={{ objectFit: 'cover' }} />
-                        <div className="card-hover-overlay">
-                          <span className="card-hover-button">Voir</span>
-                        </div>
-                      </div>
-                      <div className="card-content-group">
-                        <div className="card-title">{project.title}</div>
-                        <div className="card-description">{project.description}</div>
-                        <div style={{ marginTop: '0.5rem' }}>
-                          {project.technologies?.map((t: string, j: number) => <span key={j} className="tech-tag">{t}</span>)}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              <div style={{ marginTop: '3rem', display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
-                {['all', 'web', 'data'].map(c => (
-                  <Button key={c} variant={selectedWebsiteCategory === c ? 'primary' : 'outline'} size="sm" onClick={() => setSelectedWebsiteCategory(c)}>
-                    {c === 'all' ? 'Tous' : c === 'web' ? 'Web' : 'Data'}
-                  </Button>
-                ))}
-              </div>
-
-              <div className="grid-gallery" style={{ marginTop: '2rem' }}>
-                {filteredWebsites.filter(p => p.highlight !== "oui").map((project, i) => (
-                  <Card key={i} className="card-interactive" onClick={() => window.open(project.link, '_blank')}>
-                    <CardContent>
-                      <div className="card-image-container">
-                        <Image src={getImagePath(project.image)} alt={project.title} fill style={{ objectFit: 'cover' }} />
-                        <div className="card-hover-overlay">
-                          <span className="card-hover-button">Voir</span>
-                        </div>
-                      </div>
-                      <div className="card-content-group">
-                        <div className="card-title">{project.title}</div>
-                        <div className="card-description">{project.description}</div>
-                        <div style={{ marginTop: '0.5rem' }}>
-                          {project.technologies?.map((t: string, j: number) => <span key={j} className="tech-tag">{t}</span>)}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Graphic Design Section */}
-      <section id="graphic" className="section">
-        <div className="container">
-          <div className="section-content">
-            <div className="inner-content">
-              <h2 className="title-section">Graphisme</h2>
-              <p className="subtitle">Mes créations graphiques.</p>
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '2rem' }}>
-                {['all', 'Entreprise', 'Création', 'Autre'].map(c => (
-                  <Button key={c} variant={selectedDesignCategory === c ? 'primary' : 'outline'} size="sm" onClick={() => setSelectedDesignCategory(c)}>
-                    {c === 'all' ? 'Tous' : c}
-                  </Button>
-                ))}
-              </div>
-              <div className="grid-gallery">
-                {filteredDesigns.map((d, i) => (
-                  <Card key={i} className="card-interactive" onClick={() => openLightbox('design', d)}>
-                    <CardContent>
-                      <div className="card-image-container" style={{ aspectRatio: '1/1' }}>
-                        <Image src={getImagePath(d.image)} alt="design" fill style={{ objectFit: 'cover' }} />
-                        <div className="card-hover-overlay">
-                          <span className="card-hover-button">Voir</span>
-                        </div>
-                      </div>
-                      <div style={{ marginTop: '0.5rem' }}>
-                        <div className="card-description">{d.description}</div>
-                      </div>
-                      <div style={{ marginTop: '0.5rem' }}>
-                        <span className="tech-tag">{d.category}</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
               </div>
             </div>
           </div>
@@ -366,6 +280,117 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Graphic Design Section */}
+      <section id="graphic" className="section">
+        <div className="container">
+          <div className="section-content">
+            <div className="inner-content">
+              <h2 className="title-section">Graphisme</h2>
+              <p className="subtitle">Mes créations graphiques.</p>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '2rem' }}>
+                {['all', 'Entreprise', 'Création', 'Autre'].map(c => (
+                  <Button key={c} variant={selectedDesignCategory === c ? 'primary' : 'outline'} size="sm" onClick={() => setSelectedDesignCategory(c)}>
+                    {c === 'all' ? 'Tous' : c}
+                  </Button>
+                ))}
+              </div>
+              <div className="grid-gallery">
+                {filteredDesigns.map((d, i) => (
+                  <Card key={i} className="card-interactive" onClick={() => openLightbox('design', d)}>
+                    <CardContent>
+                      <div className="card-image-container" style={{ aspectRatio: '1/1' }}>
+                        <Image src={getImagePath(d.image)} alt="design" fill style={{ objectFit: 'cover' }} />
+                        <div className="card-hover-overlay">
+                          <span className="card-hover-button">Voir</span>
+                        </div>
+                      </div>
+                      <div style={{ marginTop: '0.5rem' }}>
+                        <div className="card-description">{d.description}</div>
+                      </div>
+                      <div style={{ marginTop: '0.5rem' }}>
+                        <span className="tech-tag">{d.category}</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Websites Section */}
+      <section id="websites" className="section">
+        <div className="container">
+          <div className="section-content">
+            <div className="inner-content">
+              <h2 className="title-section">Développement</h2>
+              <p className="subtitle">Mes projets data / web.</p>
+              
+              <div className="grid-gallery" style={{ display: 'flex', overflowX: 'auto', paddingBottom: '1rem' }}>
+                {data.websites
+                  .filter(p => p.highlight === "oui")
+                  .sort((a, b) => (a.title === "GitHub" ? 1 : b.title === "GitHub" ? -1 : 0))
+                  .map((project, i) => (
+                  <Card 
+                    key={i} 
+                    className={`card-interactive ${project.title === "GitHub" ? "card-github" : ""}`} 
+                    style={{ width: '210px', flexShrink: 0 }} 
+                    onClick={() => window.open(project.link, '_blank')}
+                  >
+                    <CardContent>
+                      <div className="card-image-container">
+                        <Image src={getImagePath(project.image)} alt={project.title} fill style={{ objectFit: 'cover' }} />
+                        <div className="card-hover-overlay">
+                          <span className="card-hover-button">Voir</span>
+                        </div>
+                      </div>
+                      <div className="card-content-group">
+                        <div className="card-title">{project.title}</div>
+                        <div className="card-description">{project.description}</div>
+                        <div style={{ marginTop: '0.5rem' }}>
+                          {project.technologies?.map((t: string, j: number) => <span key={j} className="tech-tag">{t}</span>)}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              <div style={{ marginTop: '3rem', display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
+                {['all', 'web', 'data'].map(c => (
+                  <Button key={c} variant={selectedWebsiteCategory === c ? 'primary' : 'outline'} size="sm" onClick={() => setSelectedWebsiteCategory(c)}>
+                    {c === 'all' ? 'Tous' : c === 'web' ? 'Web' : 'Data'}
+                  </Button>
+                ))}
+              </div>
+
+              <div className="grid-gallery" style={{ marginTop: '2rem' }}>
+                {filteredWebsites.filter(p => p.highlight !== "oui").map((project, i) => (
+                  <Card key={i} className="card-interactive" onClick={() => window.open(project.link, '_blank')}>
+                    <CardContent>
+                      <div className="card-image-container">
+                        <Image src={getImagePath(project.image)} alt={project.title} fill style={{ objectFit: 'cover' }} />
+                        <div className="card-hover-overlay">
+                          <span className="card-hover-button">Voir</span>
+                        </div>
+                      </div>
+                      <div className="card-content-group">
+                        <div className="card-title">{project.title}</div>
+                        <div className="card-description">{project.description}</div>
+                        <div style={{ marginTop: '0.5rem' }}>
+                          {project.technologies?.map((t: string, j: number) => <span key={j} className="tech-tag">{t}</span>)}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <section id="about" className="section">
         <div className="container">
@@ -440,6 +465,15 @@ export default function Home() {
           <p style={{ fontSize: '0.875rem', color: 'var(--muted-foreground)' }}>© 2026 TanguyM.fr. Tous droits réservés.</p>
         </div>
       </footer>
+
+      {/* Scroll to top button */}
+      <button 
+        className={`scroll-to-top ${showSticky ? 'visible' : ''}`}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        aria-label="Remonter en haut"
+      >
+        <ArrowUp size={24} />
+      </button>
     </div>
   );
 }
