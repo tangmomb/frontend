@@ -205,6 +205,15 @@ body {
   color: var(--accent-foreground);
 }
 
+.button-purple {
+  background-color: #4820a5;
+  color: white;
+}
+
+.button-purple:hover {
+  background-color: #5b2bc2;
+}
+
 .button-sm { height: 2rem; padding: 0 0.75rem; font-size: 0.86rem; }
 .button-lg { height: 2.5rem; padding: 0 1.5rem; font-size: 1rem; }
 
@@ -392,29 +401,27 @@ body {
 }
 
 /* Hero Special */
-.hero-contact-wrapper {
-  position: relative;
-  padding: 0.8px;
-  border-radius: var(--radius);
-  overflow: hidden;
-  display: inline-flex;
-  margin-left: auto;
+.hero-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
-.hero-contact-wrapper .button {
-  border: none !important;
-  background-color: rgba(10, 10, 10, 0.8) !important;
+.hero-contact-btn {
+  grid-column: 1 / -1;
+  margin-top: 1.5rem; /* Un peu plus bas */
 }
 
-.hero-contact-wrapper .button:hover {
-  background-color: rgba(36, 36, 36, 0.8) !important;
-}
-
-.hero-contact-bg {
-  position: absolute;
-  inset: -1000%;
-  animation: spin 3s linear infinite;
-  background-image: conic-gradient(from 90deg at 50% 50%, transparent 0%, #ffffff59 50%, transparent 100%);
+@media (min-width: 640px) {
+  .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .hero-contact-btn {
+    margin-top: 0;
+    margin-left: 2rem !important; /* Pour compenser la perte du style inline */
+  }
 }
 
 /* Loading Styles */

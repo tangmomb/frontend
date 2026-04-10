@@ -163,10 +163,7 @@ export default function Home() {
           <Button variant="outline" size="sm" onClick={() => scrollToSection('photos')}>Photos</Button>
           <Button variant="outline" size="sm" onClick={() => scrollToSection('graphic')}>Graphisme</Button>
           <Button variant="outline" size="sm" onClick={() => scrollToSection('websites')}>Développement</Button>
-          <div className="hero-contact-wrapper">
-            <div className="hero-contact-bg" />
-            <Button variant="outline" size="sm" onClick={() => scrollToSection('about')} style={{ position: 'relative' }}>Contact</Button>
-          </div>
+          <Button variant="purple" size="sm" onClick={() => scrollToSection('about')} style={{ marginLeft: '2rem' }}>Contact</Button>
         </nav>
       </div>
 
@@ -177,15 +174,12 @@ export default function Home() {
             <div className="inner-content">
               <h1 className="title-hero">Bonjour</h1>
               <p className="subtitle">En quoi puis-je vous aider ?</p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'flex-start' }}>
+              <div className="hero-buttons">
                 <Button variant="outline" size="lg" onClick={() => scrollToSection('videos')}>Vidéos</Button>
                 <Button variant="outline" size="lg" onClick={() => scrollToSection('photos')}>Photos</Button>
                 <Button variant="outline" size="lg" onClick={() => scrollToSection('graphic')}>Graphisme</Button>
                 <Button variant="outline" size="lg" onClick={() => scrollToSection('websites')}>Développement</Button>
-                <div className="hero-contact-wrapper">
-                  <div className="hero-contact-bg" />
-                  <Button variant="outline" size="lg" onClick={() => scrollToSection('about')} style={{ position: 'relative' }}>Contact</Button>
-                </div>
+                <Button variant="purple" size="lg" className="hero-contact-btn" onClick={() => scrollToSection('about')}>Contact</Button>
               </div>
             </div>
           </div>

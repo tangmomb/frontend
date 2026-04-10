@@ -7,7 +7,7 @@ function Button({
   size = "default",
   ...props
 }: React.ComponentProps<"button"> & {
-  variant?: "primary" | "outline"
+  variant?: "primary" | "outline" | "purple"
   size?: "default" | "sm" | "lg"
 }) {
   return (
