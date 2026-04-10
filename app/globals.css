@@ -1,26 +1,5 @@
 :root {
   --radius: 0.5rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-}
-
-.dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -39,6 +18,8 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
+  --structural-line: rgba(58, 58, 58, 0.13);
+  --content-border: rgba(54, 54, 54, 0.658);
 }
 
 /* Base Styles */
@@ -55,6 +36,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Layout */
@@ -63,13 +45,47 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center; /* Centre les sections dans la page */
+  position: relative;
+}
+
+/* Lignes verticales de structure (quadrillage léger) */
+.page-wrapper::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  max-width: 900px;
+  border-left: 1px solid var(--structural-line);
+  border-right: 1px solid var(--structural-line);
+  z-index: -1;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .page-wrapper::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  max-width: 900px;
+  border-left: 1px solid var(--structural-line);
+  border-right: 1px solid var(--structural-line);
+  z-index: -1;
+  pointer-events: none;
+}
 }
 
 .section {
   width: 100%;
   display: flex;
   justify-content: center; /* Centre le container dans la section */
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--content-border);
   position: relative;
 }
 
@@ -92,12 +108,33 @@ body {
 @media (min-width: 768px) {
   .section-content {
     padding: 6rem 2rem; /* Réduction légère du padding pour maximiser l'espace dans 900px */
-    border-left: 2px solid var(--border);
-    border-right: 2px solid var(--border);
+    border-left: 1px solid var(--content-border);
+    border-right: 1px solid var(--content-border);
   }
 }
 
 /* Typography */
+.title-hero, .title-section {
+  position: relative;
+}
+
+.title-hero::before, .title-hero::after,
+.title-section::before, .title-section::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 1px;
+  background-color: var(--structural-line);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Lignes collées au texte en compensant le line-height natif */
+.title-hero::before, .title-section::before { top: 0.15em; }
+.title-hero::after, .title-section::after { bottom: 0.15em; }
+
 .title-hero {
   font-size: 2rem;
   font-weight: 700;
@@ -114,6 +151,20 @@ body {
   font-size: 1.125rem;
   color: var(--muted-foreground);
   margin-bottom: 2rem;
+  position: relative;
+}
+
+.subtitle::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 1px;
+  background-color: var(--structural-line);
+  bottom: 0.25em; /* Ajusté pour frôler les jambages des p/j/y */
+  z-index: -1;
+  pointer-events: none;
 }
 
 @media (min-width: 768px) {
@@ -347,6 +398,7 @@ body {
   border-radius: var(--radius);
   overflow: hidden;
   display: inline-flex;
+  margin-left: auto;
 }
 
 .hero-contact-wrapper .button {
@@ -421,7 +473,7 @@ body {
   height: 60px;
   background-color: rgba(10, 10, 10, 0.8);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--structural-line);
   display: flex;
   align-items: center;
   justify-content: center;

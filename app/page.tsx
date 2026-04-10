@@ -460,7 +460,7 @@ export default function Home() {
         </div>
       )}
 
-      <footer style={{ padding: '2rem 0', textAlign: 'center', borderTop: '1px solid var(--border)' }}>
+      <footer style={{ padding: '2rem 0', textAlign: 'center', borderTop: '1px solid var(--structural-line)' }}>
         <div className="container">
           <p style={{ fontSize: '0.875rem', color: 'var(--muted-foreground)' }}>© 2026 TanguyM.fr. Tous droits réservés.</p>
         </div>
